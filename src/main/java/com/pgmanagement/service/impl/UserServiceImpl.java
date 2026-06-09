@@ -1,5 +1,6 @@
 package com.pgmanagement.service.impl;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pgmanagement.dto.UserRequestDto;
@@ -15,8 +16,12 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 
-	public UserServiceImpl(UserRepository userRepository) {
+	private final PasswordEncoder passwordEncoder;
+	
+	public UserServiceImpl(UserRepository userRepository,
+							PasswordEncoder passwordEncoder ) {
 		this.userRepository = userRepository;
+		this.passwordEncoder= passwordEncoder;
 	}
 	
 
@@ -33,7 +38,7 @@ public class UserServiceImpl implements UserService {
 		user.setLastName(request.getLastName());
 		user.setEmail(request.getEmail());
 		user.setPhoneNumber(request.getPhoneNumber());
-		user.setPassword(request.getPassword());
+		user.setPassword(passwordEncoder.encode(request.getPassword()));
 		
 		user.setRole(UserRole.STUDENT);
 		

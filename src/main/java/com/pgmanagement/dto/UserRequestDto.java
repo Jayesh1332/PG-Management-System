@@ -10,21 +10,21 @@ import lombok.Setter;
 @Setter
 public class UserRequestDto {
 
-	@NotBlank
+	@NotBlank(message = "First Name is Required")
 	private String firstName;
 	
-	@NotBlank
+	@NotBlank(message = "Last Name is Required")
 	private String lastName;
 	
-	@NotBlank
-	@Email
+	@NotBlank(message = "Email is Required")
+	@Email(message = "Invalid Email Format")
 	private String email;
 	
-	@NotBlank
+	@NotBlank(message = "Phone Number is Required")
 	private String phoneNumber;
 	
-	@NotBlank
-	@Size(min = 6)
+	@NotBlank(message = "Password is Required")
+	@Size(min = 6,message = "Password must be contain at least 6 characters")
 	private String password;
 	
 }
