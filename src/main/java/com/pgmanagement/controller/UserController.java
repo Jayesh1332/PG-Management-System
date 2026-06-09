@@ -7,6 +7,8 @@ import com.pgmanagement.dto.UserRequestDto;
 import com.pgmanagement.dto.UserResponseDto;
 import com.pgmanagement.service.UserService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +25,7 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<UserResponseDto> registerUser(@RequestBody UserRequestDto request) {
+	public ResponseEntity<UserResponseDto> registerUser(@Valid @RequestBody UserRequestDto request) {
 
 		UserResponseDto response = userService.registerUser(request);
 

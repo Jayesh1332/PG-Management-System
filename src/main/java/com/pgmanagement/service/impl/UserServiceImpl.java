@@ -6,6 +6,7 @@ import com.pgmanagement.dto.UserRequestDto;
 import com.pgmanagement.dto.UserResponseDto;
 import com.pgmanagement.entity.UserEntity;
 import com.pgmanagement.enums.UserRole;
+import com.pgmanagement.exception.EmailAlreadyExistException;
 import com.pgmanagement.repository.UserRepository;
 import com.pgmanagement.service.UserService;
 
@@ -17,9 +18,14 @@ public class UserServiceImpl implements UserService {
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
+	
 
 	@Override
 	public UserResponseDto registerUser(UserRequestDto request) {
+		
+		if(userRepository.findByEmail(request.getEmail()).isPresent()) {
+			throw new EmailAlreadyExistException("Email Already Exist");
+		}
 		
 		UserEntity user = new UserEntity();
 		
