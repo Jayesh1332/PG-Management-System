@@ -6,4 +6,5 @@ import com.pgmanagement.dto.UserResponseDto;
 public interface UserService {
 
 	UserResponseDto registerUser(UserRequestDto request);
+	
 }
